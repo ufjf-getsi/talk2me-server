@@ -28,6 +28,8 @@ public class Partida {
     private Set<Arquivo> arquivos;
 
     public Partida() {
+        this.jogadores = new HashSet<>();
+        this.arquivos = new HashSet<>();
     }
 
     public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras) {
