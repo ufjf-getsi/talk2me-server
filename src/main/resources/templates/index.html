@@ -6,17 +6,16 @@
             <div class="container">
                 <h1 class="display-3">Talk2Me, módulo de configuração</h1>
                 <p>Este módulo permite realizar o cadastro de salas, alunos e palavras para uma partida.</p>
-                <p><a class="btn btn-primary btn-lg" th:href="@{/configurar}" role="button">Crie já uma sala!</a></p>
+                <p><a class="btn btn-primary btn-lg" th:href="@{/configurar-jogo}" role="button">Crie já uma partida!</a></p>
             </div>
         </div>
 
         <div class="container">
-            <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Configurar salas de jogo</h2>
-                    <p>Aqui é possível realizar o cadastro de uma nova sala de jogo e suas respectivas informações.</p>
-                    <p><a class="btn btn-secondary" th:href="@{/configurar-jogo}" role="button">Configurar jogo</a></p>
+                    <h2>Configurar salas de partida</h2>
+                    <p>Aqui é possível realizar o cadastro de uma nova sala de uma partida e suas respectivas informações.</p>
+                    <p><a class="btn btn-secondary" th:href="@{/configurar-partida}" role="button">Configurar partida</a></p>
                 </div>
                 <div class="col-md-6">
                     <h2>Salas</h2>
@@ -26,10 +25,8 @@
                     </p>
                 </div>
             </div>
-
             <hr>
-
-        </div> <!-- /container -->
+        </div>
 
     </main>
 

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Jogo {
+public class Partida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,16 +21,16 @@ public class Jogo {
     private String senha;
     private String palavras;
     
-    @OneToMany(mappedBy = "jogo")
+    @OneToMany(mappedBy = "partida")
     private Set<Jogador> jogadores;
 
-    @OneToMany(mappedBy = "jogo")
+    @OneToMany(mappedBy = "partida")
     private Set<Arquivo> arquivos;
 
-    public Jogo() {
+    public Partida() {
     }
 
-    public Jogo(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras) {
+    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras) {
         this.id = id;
         this.titulo = titulo;
         this.turnos = turnos;
@@ -41,7 +41,7 @@ public class Jogo {
         this.arquivos = new HashSet<>();
     }
 
-    public Jogo(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras,
+    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras,
        Set<Jogador> jogadores, Set<Arquivo> arquivos) {        
         this.id = id;
         this.titulo = titulo;

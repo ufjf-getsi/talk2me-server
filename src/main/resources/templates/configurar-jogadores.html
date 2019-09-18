@@ -1,0 +1,20 @@
+<hr>
+
+<div class="container-fluid">
+
+    <div class="container text-left">
+        <form th:action="@{/configurar-jogadores}" th:object="${partida}" method="POST">
+            <div class="form-group">
+                <c:forEach var = "i" begin = "1" end = "${numAlunos}">
+                    <label> Nome do jogador ${i} </label>
+                    <input type="text" class="form-control" name="players" placeholder="Entre com o nome do jogador ${i}" required>
+                </c:forEach>
+            </div>
+            <input type ="hidden" name="partida" th:value="${partida}">
+            <button type="submit" class="btn btn-primary"> Enviar </button>
+        </form>
+    </div>
+
+</div>
+
+<hr>

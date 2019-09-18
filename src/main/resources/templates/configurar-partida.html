@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="container text-left">
-        <form th:action="@{/configurar-jogo}" th:object="${jogo}" method="POST">
+        <form th:action="@{/configurar-partida}" th:object="${partida}" method="POST">
             <div class="form-group">
                 <label> Nome da partida </label>
                 <input type="text" class="form-control" placeholder="Entre com o título da partida" 
@@ -17,7 +17,7 @@
                 <input type="number" class="form-control" placeholder="Entre com a quantidade de jogadores"
                     th:field="*{numJogadores}" th:required="required"/>
                 <label> Senha de acesso para visualizar informações do jogo posteriormente </label>
-                <input type="text" class="form-control" placeholder="Entre com uma senha"
+                <input type="password" class="form-control" placeholder="Entre com uma senha"
                     th:field="*{senha}" th:required="required"/>
                 <label> Palavras (Escreva as palavras separadas por vírgula) </label>
                 <textarea class="form-control" th:field="*{palavras}" th:required="required" rows="3">

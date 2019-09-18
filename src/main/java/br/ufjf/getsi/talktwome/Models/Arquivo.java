@@ -16,13 +16,13 @@ public class Arquivo {
     private String urlDeUpload;
     private Integer corretudeDaLeitura;
     private Integer idJogador;
-    private Integer idJogo;
+    private Integer idPartida;
 
     @ManyToOne
     private Jogador jogador;
     
     @ManyToOne
-    private Jogo jogo;
+    private Partida partida;
 
     public Arquivo() {
     }
@@ -35,15 +35,15 @@ public class Arquivo {
     }
 
     public Arquivo(Long id, String palavra, String urlDeUpload, Integer corretudeDaLeitura, Jogador jogador,
-            Integer idJogador, Jogo jogo, Integer idJogo) {
+            Integer idJogador, Partida partida, Integer idPartida) {
         this.id = id;
         this.palavra = palavra;
         this.urlDeUpload = urlDeUpload;
         this.corretudeDaLeitura = corretudeDaLeitura;
         this.jogador = jogador;
         this.idJogador = idJogador;
-        this.jogo = jogo;
-        this.idJogo = idJogo;
+        this.partida = partida;
+        this.idPartida = idPartida;
     }
 
     public Long getId() {
@@ -94,20 +94,20 @@ public class Arquivo {
         this.idJogador = idJogador;
     }
 
-    public Jogo getJogo() {
-        return jogo;
+    public Partida getPartida() {
+        return partida;
     }
 
-    public void setJogo(Jogo jogo) {
-        this.jogo = jogo;
+    public void setPartida(Partida partida) {
+        this.partida = partida;
     }
 
-    public Integer getIdJogo() {
-        return idJogo;
+    public Integer getIdPartida() {
+        return idPartida;
     }
 
-    public void setIdJogo(Integer idJogo) {
-        this.idJogo = idJogo;
+    public void setIdPartida(Integer idPartida) {
+        this.idPartida = idPartida;
     }
-    
+
 }
