@@ -17,7 +17,7 @@ public class Jogador {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nome;
-    private Integer idPartida;
+    private Long idPartida;
     
     @OneToMany(mappedBy = "jogador")
     private Set<Arquivo> arquivos;
@@ -34,7 +34,7 @@ public class Jogador {
         this.arquivos = new HashSet<>();
     }
 
-    public Jogador(Long id, String nome, Set<Arquivo> arquivos, Partida partida, Integer idPartida) {
+    public Jogador(Long id, String nome, Set<Arquivo> arquivos, Partida partida, Long idPartida) {
         this.id = id;
         this.nome = nome;
         this.arquivos = arquivos;
@@ -74,11 +74,11 @@ public class Jogador {
         this.partida = partida;
     }
 
-    public Integer getIdPartida() {
+    public Long getIdPartida() {
         return idPartida;
     }
 
-    public void setIdPartida(Integer idPartida) {
+    public void setIdPartida(Long idPartida) {
         this.idPartida = idPartida;
     }
 

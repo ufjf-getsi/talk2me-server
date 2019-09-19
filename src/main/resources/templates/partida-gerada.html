@@ -1,0 +1,48 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<main role="main">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3" th:text="${'Partida: ' + partida.titulo}"></h1>
+            <p th:text="${'A partida foi criada com o identificador: ' + partida.id}"></p>
+            <p>Informe o identificador e a senha cadastrada para que uma partida possa começar no SpaceGems.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Jogadores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="jogador: ${jogadores}" th:object="${jogador}">
+                            <td th:text="*{nome}"></td>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Palavras</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+
+    </div> 
+
+</main>
+
+<div th:replace="fragments/rodape :: rodape"></div>
