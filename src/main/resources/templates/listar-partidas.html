@@ -1,0 +1,38 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<main role="main">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h3 class="display-3">Todas as partidas ativas:</h3>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Partida</th>
+                            <th>Informações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item: ${itens}" th:object="${item}">
+                            <td th:text="*{titulo}"></td>  
+                            <td><a th:href="@{/ver-detalhes/{id}/(id=*{id})}">Detalhes</a></td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
+
+
+<div th:replace="fragments/rodape :: rodape"></div>

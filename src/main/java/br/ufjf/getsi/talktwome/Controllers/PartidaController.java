@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +22,16 @@ public class PartidaController {
     private PartidaRepository repositoryPartida;
     @Autowired
     private JogadorRepository repositoryJogador;
+
+    @RequestMapping(value = {"/listar-partidas"}, method = RequestMethod.GET)
+    public ModelAndView GetListarJogos()
+    {
+        ModelAndView mv = new ModelAndView();
+        List<Partida> partidas = repositoryPartida.findAll();
+        mv.addObject("partidas", partidas);
+        mv.setViewName("listar-partidas");
+        return mv;
+    }
 
     @RequestMapping(value = {"/configurar-partida"}, method = RequestMethod.GET)
     public ModelAndView GetCriarJogo()
