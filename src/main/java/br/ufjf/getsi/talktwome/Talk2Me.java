@@ -8,7 +8,6 @@ public class Talk2Me {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Talk2Me.class, args);
-		System.out.println("Queijo");
 	}
 
 }

@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.8.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>br.ufjf.getsi</groupId>
 	<artifactId>talktwome</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Talk2Me</name>
+	<description></description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -63,7 +63,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>	</dependencies>
+		</dependency>
+
+		<dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.1</version>
+        </dependency>
+	
+	</dependencies>
 
 	<build>
 		<plugins>
