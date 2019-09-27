@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufjf.getsi.talktwome.DTO.JogadorDTO;
+import br.ufjf.getsi.talktwome.DTO.PartidaDTO;
 import br.ufjf.getsi.talktwome.Models.Jogador;
 import br.ufjf.getsi.talktwome.Models.Partida;
 import br.ufjf.getsi.talktwome.Persistence.JogadorRepository;
@@ -94,6 +97,24 @@ public class PartidaController {
         mv.addObject("jogadores", partida.getJogadores());
         mv.setViewName("partida-gerada");
         return mv;
+    }
+
+    @RequestMapping(value = {"/info-partida"}, method = RequestMethod.GET)
+    @ResponseBody
+    public PartidaDTO GetPartidaAsJson(@RequestParam(value = "game", required = true) Long id)
+    {
+        Partida partida = repositoryPartida.getOne(id);
+        PartidaDTO partidaRetorno = new PartidaDTO();
+        partidaRetorno.setId(partida.getId());
+        partidaRetorno.setNumJogadores(partida.getNumJogadores());
+        partidaRetorno.setPalavras(partida.getPalavras());
+        partidaRetorno.setTitulo(partida.getTitulo());
+        partidaRetorno.setTurnos(partida.getTurnos());
+        for (Jogador var : partida.getJogadores()) {
+            JogadorDTO jogadorDTO = new JogadorDTO(var.getId(), var.getNome());
+            partidaRetorno.getJogadores().add(jogadorDTO);
+        }
+        return partidaRetorno;
     }
 
 }
