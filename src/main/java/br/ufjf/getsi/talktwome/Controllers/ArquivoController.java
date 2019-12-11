@@ -73,13 +73,21 @@ public class ArquivoController {
                 .url("http://200.131.17.29:5080/process-audio-game")
                 .post(requestBody)
                 .build();
-
-        Response responseFinal = client.newCall(requestFinal).execute();
         
-        String avaliacaoAudio = responseFinal.body().string();
-        ObjectMapper objectMapper2 = new ObjectMapper();
-        AudioProcessamentoDTO resultadoAudio = objectMapper2.readValue(avaliacaoAudio, AudioProcessamentoDTO.class);
-        salvarComFireStore(convertido, arquivo, resultadoAudio.getResult());
+        Response responseFinal;
+        AudioProcessamentoDTO resultadoAudio;
+        Boolean erro = false;
+        try{
+            responseFinal = client.newCall(requestFinal).execute();
+            String avaliacaoAudio = responseFinal.body().string();
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            resultadoAudio = objectMapper2.readValue(avaliacaoAudio, AudioProcessamentoDTO.class);
+        }
+        catch (Exception ex){
+            resultadoAudio = new AudioProcessamentoDTO();
+            erro = true;
+        }
+        salvarComFireStore(convertido, arquivo, resultadoAudio.getResult(), erro);
     }
 
     private File conversor(MultipartFile file) throws IOException {
@@ -92,10 +100,10 @@ public class ArquivoController {
     }
 
     @Async
-    private void salvarComFireStore(File som, ArquivoDTO arquivo, Boolean corretude)
+    private void salvarComFireStore(File som, ArquivoDTO arquivo, Boolean corretude, Boolean erro)
             throws FileNotFoundException, IOException {
-        FirestoreLocator.getInstance().getEscrita();
-        Bucket bucket = StorageClient.getInstance().bucket();
+                FirestoreLocator.getInstance().getEscrita();
+                Bucket bucket = StorageClient.getInstance().bucket();
 
         int len = (int) som.length();
         byte[] sendBuf = new byte[len];
@@ -125,6 +133,14 @@ public class ArquivoController {
         arquivoAux.setJogador(jogador);
         arquivoAux.setPalavra(arquivo.getPalavra());
         arquivoAux.setUrlDeUpload(blob.getMediaLink());
+        if (erro)
+        {
+            arquivoAux.setErro(true);
+        }
+        else
+        { // Verificar status de retorno da API do Jairo
+            arquivoAux.setCorretudeDaLeitura(100);
+        }
         repositoryArquivo.save(arquivoAux);
     }
 }

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PartidaDTO {
-    private Long id;
+    private String id;
     private String titulo;
     private Integer turnos;
     private Integer numJogadores;
@@ -15,7 +15,7 @@ public class PartidaDTO {
         this.jogadores = new HashSet<>();
     }
 
-    public PartidaDTO(Long id, String titulo, Integer turnos, Integer numJogadores, String palavras,
+    public PartidaDTO(String id, String titulo, Integer turnos, Integer numJogadores, String palavras,
             Set<JogadorDTO> jogadores) {
         this.id = id;
         this.titulo = titulo;
@@ -25,11 +25,11 @@ public class PartidaDTO {
         this.jogadores = jogadores;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,0 +1,39 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<main role="main">
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3" th:text="${'Jogador: ' + jogador.nome}"></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>Arquivos</th>
+                        <th>Corretude</th>
+                        <th>Erro</th>
+                        <th>Reenviar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="arquivo: ${arquivos}" th:object="${arquivo}">
+                        <td th:text="*{palavra}"></td>
+                        <td th:text="*{corretudeDaLeitura}"></td>
+                        <div th:if="${arquivo.erro}">
+                            <td>Houve um erro</td>
+                        </div>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</main>
+
+<div th:replace="fragments/rodape :: rodape"></div>

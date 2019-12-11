@@ -1,0 +1,21 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<hr>
+
+<div class="container-fluid">
+
+    <div class="container text-left">
+        <form th:action="@{/ver-detalhes-senha}" th:object="${partida}" method="POST">
+            <div class="form-group">
+                <label> Entre com a senha da partida </label>
+                <input type="password" class="form-control" placeholder="Entre com a senha da partida" 
+                    th:field="*{senha}"/>
+            </div>
+            <input id="id" name="id" type="hidden" th:value="${id}" />
+            <button type="submit" class="btn btn-primary"> Enviar </button>
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="fragments/rodape :: rodape"></div>

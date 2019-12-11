@@ -17,6 +17,7 @@ public class Arquivo {
     private Integer corretudeDaLeitura;
     private Long idJogador;
     private Long idPartida;
+    private Boolean erro;
 
     @ManyToOne
     private Jogador jogador;
@@ -108,6 +109,14 @@ public class Arquivo {
 
     public void setIdPartida(Long idPartida) {
         this.idPartida = idPartida;
+    }
+
+    public Boolean getErro() {
+        return erro;
+    }
+
+    public void setErro(Boolean erro) {
+        this.erro = erro;
     }
 
 }

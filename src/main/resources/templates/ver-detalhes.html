@@ -5,8 +5,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3" th:text="${'Partida: ' + partida.titulo}"></h1>
-            <p th:text="${'A partida foi criada com o identificador: ' + partida.id}"></p>
-            <p>Informe o identificador e a senha cadastrada para que uma partida possa começar no SpaceGems.</p>
+            <p th:text="${'A partida com o identificador: ' + partida.id}"></p>
         </div>
     </div>
 
@@ -17,11 +16,13 @@
                     <thead>
                         <tr>
                             <th>Jogadores</th>
+                            <th>Desempenho</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="jogador: ${jogadores}" th:object="${jogador}">
                             <td th:text="*{nome}"></td>  
+                            <td><a th:href="@{/ver-detalhes-jogador/{id}/(id=*{id})}">Detalhes</a></td>                           
                         </tr>
                     </tbody>
                 </table>

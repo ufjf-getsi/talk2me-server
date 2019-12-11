@@ -19,9 +19,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="item: ${itens}" th:object="${item}">
+                        <tr th:each="item: ${partidas}" th:object="${item}">
                             <td th:text="*{titulo}"></td>  
-                            <td><a th:href="@{/ver-detalhes/{id}/(id=*{id})}">Detalhes</a></td>                           
+                            <td><a th:href="@{/ver-detalhes-senha/{id}/(id=*{id})}">Detalhes</a></td>                           
                         </tr>
                     </tbody>
                 </table>

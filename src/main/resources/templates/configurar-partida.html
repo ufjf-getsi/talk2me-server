@@ -13,12 +13,12 @@
                 <label> Entre com a quantidade de turnos </label>
                 <input type="number" class="form-control" placeholder="Entre com a quantidade de turnos"
                     th:field="*{turnos}" th:required="required"/>
-                <label> Quantidade de jogadores </label>
-                <input type="number" class="form-control" placeholder="Entre com a quantidade de jogadores"
-                    th:field="*{numJogadores}" th:required="required"/>
                 <label> Senha de acesso para visualizar informações do jogo posteriormente </label>
                 <input type="password" class="form-control" placeholder="Entre com uma senha"
                     th:field="*{senha}" th:required="required"/>
+                <label> Jogadores (Escreva os jogadores separados por vírgula) </label>
+                <textarea class="form-control" th:field="*{jogadoresNome}" th:required="required" rows="3">                     
+                </textarea>
                 <label> Palavras (Escreva as palavras separadas por vírgula) </label>
                 <textarea class="form-control" th:field="*{palavras}" th:required="required" rows="3">
                 </textarea>

@@ -19,6 +19,7 @@ public class Partida {
     private Integer turnos;
     private Integer numJogadores;
     private String senha;
+    private String jogadoresNome;
     private String palavras;
     
     @OneToMany(mappedBy = "partida")
@@ -32,24 +33,27 @@ public class Partida {
         this.arquivos = new HashSet<>();
     }
 
-    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras) {
+    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String jogadoresNome, 
+    String senha, String palavras) {
         this.id = id;
         this.titulo = titulo;
         this.turnos = turnos;
         this.numJogadores = numJogadores;
         this.senha = senha;
+        this.jogadoresNome = jogadoresNome;
         this.palavras = palavras;
         this.jogadores = new HashSet<>();
         this.arquivos = new HashSet<>();
     }
 
-    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String senha, String palavras,
-       Set<Jogador> jogadores, Set<Arquivo> arquivos) {        
+    public Partida(Long id, String titulo, Integer turnos, Integer numJogadores, String jogadoresNome,
+       String senha, String palavras, Set<Jogador> jogadores, Set<Arquivo> arquivos) {        
         this.id = id;
         this.titulo = titulo;
         this.turnos = turnos;
         this.numJogadores = numJogadores;
         this.senha = senha;
+        this.jogadoresNome = jogadoresNome;
         this.palavras = palavras;
         this.jogadores = jogadores;
         this.arquivos = arquivos;
@@ -117,6 +121,14 @@ public class Partida {
 
     public void setArquivos(Set<Arquivo> arquivos) {
         this.arquivos = arquivos;
+    }
+
+    public String getJogadoresNome() {
+        return jogadoresNome;
+    }
+
+    public void setJogadoresNome(String jogadoresNome) {
+        this.jogadoresNome = jogadoresNome;
     }
     
 }

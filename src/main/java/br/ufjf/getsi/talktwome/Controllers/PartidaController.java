@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,37 +54,21 @@ public class PartidaController {
         Md5 md5 = new Md5();
         String senha = md5.encriptografar(partida.getSenha()); 
         partida.setSenha(senha);
+        String []nomeJogadores = partida.getJogadoresNome().split(",");
+        partida.setNumJogadores(nomeJogadores.length);
         repositoryPartida.save(partida);
 
-        for (int i = 0; i < partida.getNumJogadores(); i++)
+        for (int i = 0; i < nomeJogadores.length; i++)
         {
             Jogador jogador = new Jogador();
-            jogador.setId(i + 1L);
-            partida.getJogadores().add(jogador);
-        }
-        mv.addObject("id", partida.getId());
-        mv.addObject("jogadores", partida.getJogadores());
-        mv.setViewName("configurar-jogadores");
-        return mv;
-    }
-
-    @RequestMapping(value = {"/configurar-jogadores"}, method = RequestMethod.POST)
-    public ModelAndView PostCriarJogadores(@RequestParam(value = "id", required = true) Long id, 
-    @RequestParam(value = "jogadores") String[] jogadores)
-    {
-        ModelAndView mv = new ModelAndView();       
-        Partida partida = repositoryPartida.getOne(id); 
-        for (int i = 0; i < jogadores.length; i++)
-        {
-            Jogador jogador = new Jogador();
-            jogador.setNome(jogadores[i]);
-            jogador.setIdPartida(id);
+            jogador.setNome(nomeJogadores[i]);
+            jogador.setIdPartida(partida.getId());
             jogador.setPartida(partida);
             partida.getJogadores().add(jogador);
             repositoryJogador.save(jogador);
         }
         repositoryPartida.save(partida);
-        mv.addObject("game", id);
+        mv.addObject("game", partida.getId());
         mv.setViewName("redirect:partida-gerada");
         return mv;
     }
@@ -105,7 +90,7 @@ public class PartidaController {
     {
         Partida partida = repositoryPartida.getOne(id);
         PartidaDTO partidaRetorno = new PartidaDTO();
-        partidaRetorno.setId(partida.getId());
+        partidaRetorno.setId(Long.toString(partida.getId()));
         partidaRetorno.setNumJogadores(partida.getNumJogadores());
         partidaRetorno.setPalavras(partida.getPalavras());
         partidaRetorno.setTitulo(partida.getTitulo());
@@ -116,5 +101,37 @@ public class PartidaController {
         }
         return partidaRetorno;
     }
+
+    @RequestMapping(value = {"/ver-detalhes-senha/{id}"}, method = RequestMethod.GET)
+    public ModelAndView GetDetalhes(@PathVariable(value = "id", required = true) Long id)
+    {
+        ModelAndView mv = new ModelAndView();
+        Partida partida = new Partida();
+        partida.setId(id);
+        mv.addObject("partida", partida);
+        mv.setViewName("ver-detalhes-senha");
+        return mv;
+    }
+
+    @RequestMapping(value = {"/ver-detalhes-senha"}, method = RequestMethod.POST)
+    public ModelAndView PostDetalhes(@RequestParam(value = "id", required = true) Long id, Partida partida)
+    {
+        ModelAndView mv = new ModelAndView();
+        Partida partidaFinal = repositoryPartida.getOne(id);
+        Md5 md5 = new Md5();
+        if (partidaFinal.getSenha().equals(md5.encriptografar(partida.getSenha())))
+        {
+            mv.addObject("partida", partidaFinal);
+            mv.addObject("jogadores", partidaFinal.getJogadores());
+            mv.setViewName("ver-detalhes");
+            return mv;
+        }
+        else
+        {
+            mv.setViewName("redirect:partida-gerada");
+        }
+        return mv;
+    }
+
 
 }
